@@ -134,13 +134,14 @@ vocal_2 = AudioSegment.from_wav(r"C:\Users\aleks\Pulpit\app_mashup_music\venv\de
 # vocal_1_arr, sr = librosa.load(r"C:\Users\aleks\Pulpit\app_mashup_music\venv\decomposition4\KatyPerry_alluneed_tv\vocals.wav")
 # vocal_2_arr, sr = librosa.load(r"C:\Users\aleks\Pulpit\app_mashup_music\venv\decomposition4\TaylorSwift_EdSheeran_Run_tv\vocals.wav")
 
+acc = AudioSegment.from_wav(r'C:\Users\aleks\Pulpit\app_mashup_music\venv\all_songs\combined_songs\KatyPerry_Taylor_Ed_alluneed_run.wav')
+
 vocals1 = vocal_detection(vocal_1)
 vocals2 = vocal_detection(vocal_2)
 
-print(vocals1.fragments[0])
-print(vocals1.fragments[1])
-print(vocals2.fragments[0])
-print(vocals2.fragments[1])
+output = replace_vocals(vocals1, vocals2, vocal_1, vocal_2, acc)
+
+output.export(r'C:\Users\aleks\Pulpit\app_mashup_music\venv\all_songs\combined_songs\KatyPerry_Taylor_Ed_alluneed_run_vocals.wav', format='wav')
 
 # print(len(vocals1))
 # print(len(vocals2))
