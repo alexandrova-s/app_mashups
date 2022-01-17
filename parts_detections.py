@@ -8,15 +8,16 @@ class Fragment:
         self.duration = duration
 
 class Fragments:
-    fragments = []
+    # fragments = []
+
+    def __init__(self):
+        self.fragments = []
 
     def __len__(self):
         return len(self.fragments)
 
-    def append2(self, start, stop, duration):
+    def append_fragment(self, start, stop, duration):
         self.fragments.append(Fragment(start, stop, duration))
-
-
 
 
 def silences_detection(sound):
@@ -29,7 +30,7 @@ def silences_detection(sound):
     return silence
 
 
-def vocal_detection(sound, time_threshold = 500):
+def vocal_detection(sound, time_threshold = 5000):
     dBFS = sound.dBFS
     silence = sn.detect_silence(sound, min_silence_len=500, silence_thresh=dBFS-16)
 
@@ -39,7 +40,7 @@ def vocal_detection(sound, time_threshold = 500):
     for index, x in enumerate(silence):
         try:
             if abs(silence[index][0]-x[1]) > time_threshold:
-                voice.append2(x[1], silence[index][0], silence[index][0]-x[1])
+                voice.append_fragment(x[1], silence[index][0], silence[index][0]-x[1])
         except IndexError as e:
             print('blooooooo')
             return voice
